@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bubu Dudu Special</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffdde1;
+    text-align: center;
+  }
+  .page {
+    display: none;
+    min-height: 100vh;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    color: #333;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .page.active {
+    display: flex;
+  }
+  .page img {
+    max-width: 200px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+  }
+  h1, h2, p {
+    margin-bottom: 25px;
+  }
+  .options {
+    margin-bottom: 25px;
+  }
+  .options input[type="radio"] {
+    display: none;
+  }
+  .option-label {
+    display: inline-block;
+    background: #fff;
+    border: 2px solid #ff6699;
+    border-radius: 25px;
+    padding: 10px 25px;
+    margin: 0 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .options input[type="radio"]:checked + .option-label {
+    background-color: #ff6699;
+    color: white;
+  }
+  button {
+    background-color: #ff4d80;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  button:disabled {
+    background-color: #ffb3c6;
+    cursor: not-allowed;
+  }
+  button:hover:not(:disabled) {
+    background-color: #e6005c;
+  }
+
+  /* Heart drop animation */
+  .heart {
+    position: fixed;
+    top: -10px;
+    color: red;
+    font-size: 24px;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    to { transform: translateY(110vh); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Page 1 -->
+<div class="page active" id="page1">
+  <img src="https://i.postimg.cc/QdyS5zsQ/bubu-dudu-sseeyall-1.webp" alt="hello">
+  <h1>Hello, Sachdeva Ji</h1>
+  <button onclick="nextPage(2)">Next</button>
+</div>
+
+<!-- Page 2 -->
+<div class="page" id="page2">
+  <img src="https://i.postimg.cc/BvDYQTyc/bubu-dudu-sseeyall.webp" alt="q2">
+  <h2>DO YOU LIKE ME?<br><small>(Obviously as a friend prr usse thoda jyada wala)</small></h2>
+  <div class="options">
+    <input type="radio" id="q2_yes" name="q2" value="yes" />
+    <label for="q2_yes" class="option-label">Yes</label>
+    <input type="radio" id="q2_no" name="q2" value="no" />
+    <label for="q2_no" class="option-label">No</label>
+  </div>
+  <button id="btn2" disabled onclick="nextPage(3)">Next</button>
+</div>
+
+<!-- Page 3 -->
+<div class="page" id="page3">
+  <img src="https://i.postimg.cc/ZnfjDVBZ/fear-fear-bubu.webp" alt="q3">
+  <h2>Think again Mr.</h2>
+  <div class="options">
+    <input type="radio" id="q3_yes" name="q3" value="yes" />
+    <label for="q3_yes" class="option-label">Yes</label>
+    <input type="radio" id="q3_no" name="q3" value="no" />
+    <label for="q3_no" class="option-label">No</label>
+  </div>
+  <button id="btn3" disabled onclick="nextPage(4)">Next</button>
+</div>
+
+<!-- Page 4 -->
+<div class="page" id="page4">
+  <img src="https://i.postimg.cc/fTrBcqQf/peachu-gomu-bubu-dudu.webp" alt="q4">
+  <h2>Sochlo ek baar aur...<br>Mere jesi nhi milegi kahi aapko 😌</h2>
+  <div class="options">
+    <input type="radio" id="q4_yes" name="q4" value="yes" />
+    <label for="q4_yes" class="option-label">Yes I do</label>
+    <input type="radio" id="q4_no" name="q4" value="no" />
+    <label for="q4_no" class="option-label">No I don't</label>
+  </div>
+  <button id="btn4" disabled onclick="nextPage(5)">Next</button>
+</div>
+
+<!-- Page 5 -->
+<div class="page" id="page5">
+  <img src="https://i.postimg.cc/jq8XT32Y/bubu-bear-dudu.webp" alt="q5">
+  <h2>Maan jaao naa yrr<br>aur kitnaa bhaw khaaoge</h2>
+  <button onclick="nextPage(6)">Next</button>
+</div>
+
+<!-- Page 6 (Final) -->
+<div class="page" id="page6">
+  <img src="https://i.postimg.cc/BvyYJhMv/bubu-dudu-sseeyall-2.webp" alt="final">
+  <p style="font-size: 1.2em; margin-bottom: 20px;">
+    "Aap humse pyar nhi krte hai ye aapka vishay hai prr hum aapse pyar krte hai and krte hi rhenge hi hmara vishay hai hume isme aapki sehmati ki zrurt nhi hai🫠🫠"
+  </p>
+  <p style="font-size: 1.5em;">I like you <span style="color:red;">❤️</span></p>
+  <button onclick="alert('Thank you! ❤️')">Finish</button>
+</div>
+
+<script>
+  function nextPage(pageNum) {
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    document.getElementById('page' + pageNum).classList.add('active');
+    if (pageNum === 6) {
+      setInterval(createHeart, 500);
+    }
+  }
+  ['2','3','4'].forEach(num => {
+    const radios = document.querySelectorAll('input[name="q' + num + '"]');
+    const btn = document.getElementById('btn' + num);
+    radios.forEach(radio => {
+      radio.addEventListener('change', () => { btn.disabled = false; });
+    });
+  });
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerText = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }
+</script>
+
+</body>
+</html>
